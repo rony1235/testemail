@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { createCanvas, loadImage } = require("canvas");
+const { createCanvas, loadImage, registerFont } = require("canvas");
 const path = require("path");
 const port = process.env.PORT || 8080;
 app.use(express.static("public"));
