@@ -8,7 +8,6 @@ app.get("/", (req, res) => {
   res.send("Subscribe to Arpan Neupane's channel");
 });
 
-
 app.get("/generate-card", async (req, res) => {
   try {
     const name = req.query.name || "Guest";
@@ -31,7 +30,7 @@ app.get("/generate-card", async (req, res) => {
     ctx.strokeStyle = "#000000";
     ctx.lineWidth = 4;
     ctx.textAlign = "center";
-    ctx.font = 'bold 60px "Arial"';
+    ctx.font = "bold 60px";
 
     // Calculate position (top center with padding)
     const x = canvas.width / 2;
