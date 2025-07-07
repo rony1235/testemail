@@ -30,7 +30,7 @@ app.get("/generate-card", async (req, res) => {
     ctx.strokeStyle = "#000000";
     ctx.lineWidth = 4;
     ctx.textAlign = "center";
-    ctx.font = "bold 60px";
+    ctx.font = "bold 60px 'Arial', 'Helvetica', sans-serif";
 
     // Calculate position (top center with padding)
     const x = canvas.width / 2;
