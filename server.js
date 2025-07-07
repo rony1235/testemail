@@ -4,8 +4,13 @@ const { createCanvas, loadImage } = require("canvas");
 const path = require("path");
 const port = process.env.PORT || 8080;
 app.use(express.static("public"));
+
+registerFont(path.join(__dirname, "fonts", "Freedom-10eM.ttf"), {
+  family: "Freedom",
+  weight: "bold",
+});
 app.get("/", (req, res) => {
-  console.log(createCanvas(1, 1).getContext("2d").getFontFamilies());
+  // console.log(createCanvas(1, 1).getContext("2d").getFontFamilies());
 
   res.send(
     "Subscribe to Arpan Neupane's channel" +
@@ -35,7 +40,7 @@ app.get("/generate-card", async (req, res) => {
     ctx.strokeStyle = "#000000";
     ctx.lineWidth = 4;
     ctx.textAlign = "center";
-    ctx.font = "bold 60px 'Arial', 'Helvetica', sans-serif";
+    ctx.font = "bold 60px 'Freedom', 'Helvetica', sans-serif";
 
     // Calculate position (top center with padding)
     const x = canvas.width / 2;
