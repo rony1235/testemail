@@ -5,7 +5,12 @@ const path = require("path");
 const port = process.env.PORT || 8080;
 app.use(express.static("public"));
 app.get("/", (req, res) => {
-  res.send("Subscribe to Arpan Neupane's channel");
+  console.log(createCanvas(1, 1).getContext("2d").getFontFamilies());
+
+  res.send(
+    "Subscribe to Arpan Neupane's channel" +
+      createCanvas(1, 1).getContext("2d").getFontFamilies()
+  );
 });
 
 app.get("/generate-card", async (req, res) => {
