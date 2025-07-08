@@ -5,56 +5,61 @@ const path = require("path");
 const port = process.env.PORT || 8080;
 app.use(express.static("public"));
 
+// Register the custom font
 registerFont(path.join(__dirname, "fonts", "Freedom-10eM.ttf"), {
   family: "Freedom",
   weight: "bold",
 });
-app.get("/", (req, res) => {
-  // console.log(createCanvas(1, 1).getContext("2d").getFontFamilies());
 
+// Home route
+app.get("/", (req, res) => {
   res.send(
     "Subscribe to Arpan Neupane's channel" +
       createCanvas(1, 1).getContext("2d").getFontFamilies()
   );
 });
 
+// Generate card image
 app.get("/generate-card", async (req, res) => {
   try {
     const name = req.query.name || "Guest";
-    const number = req.query.number || "000";
-    const text = `${name} - ${number}`;
+    const number = req.query.number || "0000 0000 0000 0000";
+    const textName = name.toUpperCase();
+    const textNumber = number;
 
-    // Load card background image
-    const imagePath = path.join(__dirname, "public", "card-background.png");
-    const background = await loadImage(imagePath);
+    // Standard credit card dimensions at 300 DPI: 1012x638 px
+    const width = 1012;
+    const height = 638;
 
-    // Create canvas matching background size
-    const canvas = createCanvas(background.width, background.height);
+    const canvas = createCanvas(width, height);
     const ctx = canvas.getContext("2d");
 
-    // Draw background
-    ctx.drawImage(background, 0, 0);
+    // Optional background image (if you have one)
+    const imagePath = path.join(__dirname, "public", "card-background.png");
+    const background = await loadImage(imagePath);
+    ctx.drawImage(background, 0, 0, width, height);
 
     // Text styling
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#ffffff";
     ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 4;
-    ctx.textAlign = "center";
-    ctx.font = "bold 60px 'Freedom', 'Helvetica', sans-serif";
+    ctx.lineWidth = 2;
+    ctx.textAlign = "left";
 
-    // Calculate position (top center with padding)
-    const x = canvas.width / 2;
-    const y = 80;
+    // Card number
+    ctx.font = "bold 48px 'Freedom'";
+    ctx.strokeText(textNumber, 60, height / 2);
+    ctx.fillText(textNumber, 60, height / 2);
 
-    // Draw text with outline
-    ctx.strokeText(text, x, y);
-    ctx.fillText(text, x, y);
+    // Name (bottom-left)
+    ctx.font = "bold 36px 'Freedom'";
+    ctx.strokeText(textName, 60, height - 80);
+    ctx.fillText(textName, 60, height - 80);
 
-    // Set response headers
+    // Set headers
     res.setHeader("Content-Type", "image/png");
-    res.setHeader("Cache-Control", "no-store, max-age=0");
+    res.setHeader("Cache-Control", "no-store");
 
-    // Send image
+    // Pipe image
     canvas.createPNGStream().pipe(res);
   } catch (error) {
     console.error("Error generating card:", error);
@@ -62,6 +67,7 @@ app.get("/generate-card", async (req, res) => {
   }
 });
 
+// Start server
 app.listen(port, () => {
-  `Server started on port ${port}`;
+  console.log(`Server started on port ${port}`);
 });
