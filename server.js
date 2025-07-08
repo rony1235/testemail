@@ -6,7 +6,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static("public"));
 
 // Register the custom font
-registerFont(path.join(__dirname, "fonts", "Freedom-10eM.ttf"), {
+registerFont(path.join(__dirname, "fonts", "Poppins Regular 400.ttf"), {
   family: "Freedom",
   weight: "bold",
 });
