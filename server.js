@@ -47,8 +47,8 @@ app.get("/generate-card", async (req, res) => {
 
     // Card number
     ctx.font = "bold 48px 'Freedom'";
-    ctx.strokeText(textNumber, 60, height / 2);
-    ctx.fillText(textNumber, 60, height / 2);
+    ctx.strokeText(textNumber, 60, height / 1.3);
+    ctx.fillText(textNumber, 60, height / 1.3);
 
     // Name (bottom-left)
     ctx.font = "bold 36px 'Freedom'";
