@@ -6,9 +6,9 @@ const QRCode = require("qrcode");
 const port = process.env.PORT || 8080;
 app.use(express.static("public"));
 
-registerFont(path.join(__dirname, "fonts", "Freedom-10eM.ttf"), {
-  family: "Freedom",
-  weight: "bold",
+registerFont(path.join(__dirname, "fonts", "Poppins Regular 400.ttf"), {
+  family: "Poppins",
+  weight: "normal",
 });
 
 app.get("/", (req, res) => {
