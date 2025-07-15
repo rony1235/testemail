@@ -40,7 +40,7 @@ app.get("/generate-card", async (req, res) => {
     ctx.textAlign = "left";
 
     // Card number (center-left)
-    ctx.font = "bold 70px 'Freedom'";
+    ctx.font = "bold 20px 'Freedom'";
     ctx.strokeText(textNumber, 60, height / 1.25);
     ctx.fillText(textNumber, 60, height / 1.25);
 
