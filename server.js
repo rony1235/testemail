@@ -50,7 +50,9 @@ app.get("/generate-card", async (req, res) => {
     ctx.fillText(textName, 60, height - 80);
 
     // Generate QR code
-    const qrData = `${name} - ${number}`;
+    const original = number;
+    const cleaned = original.replace(/-/g, "");
+    const qrData = `${cleaned}`;
     const qrBuffer = await QRCode.toBuffer(qrData, {
       width: 150,
       color: {
