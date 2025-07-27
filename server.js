@@ -19,6 +19,7 @@ app.get("/generate-card", async (req, res) => {
   try {
     const name = req.query.name || "Guest";
     const number = req.query.number || "0000 0000 0000 0000";
+    const email = req.query.email;
     const textName = name.toUpperCase();
     const textNumber = number;
 
@@ -52,7 +53,7 @@ app.get("/generate-card", async (req, res) => {
     // Generate QR code
     const original = number;
     const cleaned = original.replace(/-/g, "");
-    const qrData = `${cleaned}`;
+    const qrData = `https://admin.cityscapelifestyle.com/member-management/zoho/${email}`;
     const qrBuffer = await QRCode.toBuffer(qrData, {
       width: 150,
       color: {
